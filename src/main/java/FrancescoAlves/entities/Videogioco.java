@@ -1,5 +1,7 @@
 package FrancescoAlves.entities;
 
+import FrancescoAlves.exceptions.ValidazioneDati;
+
 public class Videogioco extends Gioco {
 
     private String piattaforma;
@@ -7,7 +9,7 @@ public class Videogioco extends Gioco {
     private Genere genere;
 
 
-    public Videogioco(String id, String titolo, int annoPubblicazione, double prezzo, String piattaforma, Double durata, Genere genere) {
+    public Videogioco(String id, String titolo, int annoPubblicazione, double prezzo, String piattaforma, Double durata, Genere genere) throws ValidazioneDati {
         super(id, titolo, annoPubblicazione, prezzo);
         this.piattaforma = piattaforma;
         this.durata = durata;

@@ -1,16 +1,22 @@
 package FrancescoAlves.entities;
 
+import FrancescoAlves.exceptions.ValidazioneDati;
+
 public abstract class Gioco {
     private String id;
     private String titolo;
     private int annoPubblicazione;
     private double prezzo;
 
-    public Gioco(String id, String titolo, int annoPubblicazione, double prezzo) {
+    public Gioco(String id, String titolo, int annoPubblicazione, double prezzo) throws ValidazioneDati {
+
+        if (id == null || id.isEmpty()) throw new ValidazioneDati("Il campo ID non può essere vuoto");
+        if (titolo == null || titolo.isEmpty()) throw new ValidazioneDati("Il titolo non può essere vuoto");
+
         this.id = id;
         this.titolo = titolo;
         this.annoPubblicazione = annoPubblicazione;
-        this.prezzo = prezzo;
+        setPrezzo(prezzo);
     }
 
     public String getId() {
@@ -41,11 +47,11 @@ public abstract class Gioco {
         return prezzo;
     }
 
-    public void setPrezzo(double prezzo) {
-        if (prezzo > 0) {
-            this.prezzo = prezzo;
+    public void setPrezzo(double prezzo) throws ValidazioneDati {
+        if (prezzo <= 0) {
+            throw new ValidazioneDati("Il prezzo deve essere un valore positivo " + prezzo);
         } else {
-            System.out.println("Il prezzo deve essere un valore positivo");
+            this.prezzo = prezzo;
         }
     }
 
