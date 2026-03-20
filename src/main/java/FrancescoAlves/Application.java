@@ -45,6 +45,7 @@ public class Application {
 
             System.out.println("SPAZIO------------------------------------------------");
 
+            // aggiornamento del gioco
 
             Videogioco fifaNuovo = new Videogioco("a2", "Fifa 26 Ultimate Edition", 2025, 99.99, "PS5", 50.0, Genere.SPORT);
             collect.aggiornaGioco("a2", fifaNuovo);
