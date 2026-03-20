@@ -2,6 +2,8 @@ package FrancescoAlves.entities;
 
 import FrancescoAlves.exceptions.ValidazioneDati;
 
+import java.time.LocalDate;
+
 public abstract class Gioco {
     private String id;
     private String titolo;
@@ -10,13 +12,24 @@ public abstract class Gioco {
 
     public Gioco(String id, String titolo, int annoPubblicazione, double prezzo) throws ValidazioneDati {
 
-        if (id == null || id.isEmpty()) throw new ValidazioneDati("Il campo ID non può essere vuoto");
-        if (titolo == null || titolo.isEmpty()) throw new ValidazioneDati("Il titolo non può essere vuoto");
+        if (id == null && id.isBlank()) {
+            throw new ValidazioneDati("Il campo ID non può essere vuoto");
+        }
+        if (titolo == null || titolo.isBlank()) {
+            throw new ValidazioneDati("Il titolo non può essere vuoto");
+        }
+        if (annoPubblicazione <= 0 || annoPubblicazione > LocalDate.now().getYear()) {
+            throw new ValidazioneDati("L'anno di pubblicazione non valido");
+        }
+        if (prezzo <= 0) {
+            throw new ValidazioneDati("Il prezzo non può essere negativo");
+        }
+
 
         this.id = id;
         this.titolo = titolo;
         this.annoPubblicazione = annoPubblicazione;
-        setPrezzo(prezzo);
+        this.prezzo = prezzo;
     }
 
     public String getId() {

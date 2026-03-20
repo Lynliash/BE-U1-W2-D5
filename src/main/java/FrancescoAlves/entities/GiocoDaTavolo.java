@@ -9,8 +9,15 @@ public class GiocoDaTavolo extends Gioco {
 
     public GiocoDaTavolo(String id, String titolo, int annoPubblicazione, double prezzo, int numeroDiGiocatori, Double durataMedia) throws ValidazioneDati {
         super(id, titolo, annoPubblicazione, prezzo);
-        setNumeroDiGiocatori(numeroDiGiocatori);
+
+        if (numeroDiGiocatori < 2 || numeroDiGiocatori > 10) {
+            throw new ValidazioneDati("Numero di giocatori non valido");
+        }
+        if (durataMedia <= 0) {
+            throw new ValidazioneDati("Durata non valida");
+        }
         this.durataMedia = durataMedia;
+        this.numeroDiGiocatori = numeroDiGiocatori;
     }
 
     public int getNumeroDiGiocatori() {

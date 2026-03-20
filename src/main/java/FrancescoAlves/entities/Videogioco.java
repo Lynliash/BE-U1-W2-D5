@@ -11,6 +11,18 @@ public class Videogioco extends Gioco {
 
     public Videogioco(String id, String titolo, int annoPubblicazione, double prezzo, String piattaforma, Double durata, Genere genere) throws ValidazioneDati {
         super(id, titolo, annoPubblicazione, prezzo);
+
+        if (piattaforma == null || piattaforma.isBlank()) {
+            throw new ValidazioneDati("Piattaforma non valida");
+        }
+        if (durata <= 0) {
+            throw new ValidazioneDati("Durata non valida");
+        }
+        if (genere == null) {
+            throw new ValidazioneDati("Genere non impostato");
+        }
+
+
         this.piattaforma = piattaforma;
         this.durata = durata;
         this.genere = genere;
